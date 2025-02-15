@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'praveen.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'local host',
-        'HOST': 'shop',
+        'NAME': 'shop',           # The name of your database
+        'HOST': 'localhost',      # Change this to your MySQL server address if not local
         'USER': 'root',
         'PASSWORD': 'root',
         'PORT': '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Helps avoid full strict mode issues
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
