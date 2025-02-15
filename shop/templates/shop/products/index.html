@@ -1,0 +1,123 @@
+<style>
+    .fixed-size-card {
+        height: 300px;
+        overflow: hidden;
+
+    }
+
+    .card-body {
+        height: 100px;
+        overflow: hidden;
+
+    }
+
+   
+    .product-img {
+        max-height: 250px;
+        object-fit: cover;
+        
+    }
+
+   
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 10px;
+        
+    }
+
+    
+    .card:hover {
+        transform: translateY(-10px);
+        
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        
+    }
+
+    /* Style for price text */
+    .old_price {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .new_price {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    /* Ensure proper spacing and alignment */
+    .card-body {
+        padding: 15px;
+    }
+
+
+
+
+
+    .old_price {
+        font-weight: bold;
+        color: red;
+
+
+    }
+
+    .new_price {
+        background-color: green;
+        color: white;
+        font-weight: bold;
+        padding: 2px;
+        border-radius: 5px;
+
+    }
+
+
+    
+</style>
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+ShopKart | Online Shopping
+{% endblock title %}
+
+
+{% block content %}
+
+<section class="bg-light py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">{{category_name}} products</h4>
+                <hr style="border-color: #b8bfc2;">
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item">{{category_name}} Collections</a></li>
+
+                    </ol>
+                </nav>
+                {% include 'shop/inc/message.html' %}
+            </div>
+            {% for item in products %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card my-3 fixed-size-card">
+                    <img src="{{item.product_image.url}}" class="mx-auto d-block card-img-top h-50 w-50 mt-2"
+                        alt="Categories">
+                    <a href="{% url 'product_details' category_name item.name %}">
+                        <div class="card-body mt-2">
+                            <h5 class="card-title text-primary mt-3">{{ item.name }}</h5>
+                            <p class="card-text mt-2">
+                                <span class="float-start old_price"><s>Rs.{{ item.orginal_price|stringformat:'d'}}</s></span>
+                                <span class="float-end new_price">Rs.{{ item.selling_price }}</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock content %}
