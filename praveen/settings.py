@@ -79,12 +79,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shop',
-        'HOST':'localhost',
-        'USER':'root',
-        'PASSWORD':'root',
-        'PORT':'3306',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Helps avoid full strict mode issues
+        },
     }
 }
+
 
 
 # Password validation
